@@ -4,7 +4,7 @@
 # TLDR
 
 ----
-### To Start:
+### Install:
 ``
 pip install allosaurus
 ``
@@ -15,6 +15,8 @@ python setup.py install
 
 `python -m allosaurus.bin.update_phone --lang eng --input eng.txt`
 
+
+### Run:
 ``
 python -X utf8 -m allosaurus.run --timestamp==true --lang=eng -i audio.wav (ex. Kitty2.wav)
 ``
