@@ -6,14 +6,8 @@
 ----
 ### Install:
 ``
-pip install allosaurus
+pip3.11 install git+https://github.com/JohnnyMeran/Allosaurus.git@master
 ``
-
-``
-python setup.py install
-``
-
-`python -m allosaurus.bin.update_phone --lang eng --input eng.txt`
 
 
 ### Run:
