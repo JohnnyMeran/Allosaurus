@@ -1,3 +1,65 @@
+
+
+
+# TLDR
+
+----
+### To Start:
+``
+pip install allosaurus
+``
+
+``
+python setup.py install
+``
+
+`python -m allosaurus.bin.update_phone --lang eng --input eng.txt`
+
+``
+python -X utf8 -m allosaurus.run --timestamp==true --lang=eng -i audio.wav (ex. Kitty2.wav)
+``
+
+Keep in mind that the file must be .wav and the fact that it should be a file and not an byte[ ].
+
+
+### Output:
+
+```
+"{\"time\":90,\"type\":\"viseme\",\"value\":\"k\"}\n{\"time\":150,\"type\":\"viseme\",\"value\":\"@\"}\n{\"time\":270,\"type\":\"viseme\",\"value\":\"t\"}\n{\"time\":330,\"type\":\"viseme\",\"value\":\"O\"}\n{\"time\":450,\"type\
+":\"viseme\",\"value\":\"u\"}\n{\"time\":840,\"type\":\"viseme\",\"value\":\"E\"}\n{\"time\":960,\"type\":\"viseme\",\"value\":\"f\"}\n{\"time\":1020,\"type\":\"viseme\",\"value\":\"r\"}\n{\"time\":1050,\"type\":\"viseme\",\"valu
+e\":\"i\"}\n{\"time\":1170,\"type\":\"viseme\",\"value\":\"u\"}\n{\"time\":1230,\"type\":\"viseme\",\"value\":\"E\"}\n{\"time\":1380,\"type\":\"viseme\",\"value\":\"t\"}\n{\"time\":2180,\"type\":\"viseme\",\"value\":\"sil\"}\n{\"
+time\":2430,\"type\":\"viseme\",\"value\":\"i\"}\n{\"time\":2550,\"type\":\"viseme\",\"value\":\"i\"}\n{\"time\":2610,\"type\":\"viseme\",\"value\":\"i\"}\n{\"time\":2700,\"type\":\"viseme\",\"value\":\"t\"}\n{\"time\":2850,\"typ
+e\":\"viseme\",\"value\":\"s\"}\n{\"time\":2940,\"type\":\"viseme\",\"value\":\"E\"}\n{\"time\":2970,\"type\":\"viseme\",\"value\":\"i\"}\n{\"time\":3060,\"type\":\"viseme\",\"value\":\"f\"}\n{\"time\":3150,\"type\":\"viseme\",\"
+value\":\"i\"}\n{\"time\":3330,\"type\":\"viseme\",\"value\":\"t\"}\n{\"time\":3390,\"type\":\"viseme\",\"value\":\"i\"}\n"
+```
+
+### Request type for Unreal:
+ Don't use this for testing, the structure was shortened in order to display!!
+```
+    {
+        "viseme":"{\"time\":90,\"type\":\"viseme\",\"value\":\"k\"}\n{\"time\":150,\"type\":\"viseme\",\"value\":\"@\"}\n{\"time\":210,\"type\":\"viseme\",
+                \"value\":\"t\"}\n{\"time\":330,\"type\":\"viseme\",\"value\":\"O\"}\n{\"time\":480,\"type\":\"viseme\",\"value\":\"u\"}\n{\"time\":650,\"type\":\"viseme\",
+                "value\":\"E\"}\n{\"time\":9390,\"type\":\"viseme\",\"value\":\"t\"}\n", 
+        "audio":{
+            "data":[82,73,70,70,116,55,15,0,87,65,86,69,102,109,116,32,16,0,0,0,1,0,1,0,-128,
+                -69,0,0,0,119,1,0,2,0,16,0,100,97,116,97,80,55,15,0,-4,-1,-2,-1,0,0,0,0,1,0,1,0,1,0,3,0,5,0,3,0,1,0,2,0,2,0,3,0,3,0,2,0,1,0,1,0,1,0,2,0,1,0,1,0,0,0,0,0,0,0,0,0,1,
+                0,0,0,0,0,1,0,2,0,2,0,2,0,2,0,1,0,1,0,2,0,1,0,0,0,1,0,1,0,0,0,1,0,3,0,2,0,2,0,2,0,2,0,3,0,3,0,1,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,2,0,2,0,1,0,1,0,0,0,0,0,
+                0,0,-1,-1,-1,-1,-1,-1,0,0,0,0,0,0,0,0,1,0,2,0,0,0,0,0,1,0,1,0,0,0,-1,-1,0,0,0,0,0,0,0,0,0,0,0,0,2,0,3,0,2,0,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,
+                0,0,0,1,0,0,0,-1,-1,-1,-1,0,0,0,0,89,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            "type":"Buffer"
+        }
+    }
+```
+
+
+```
+    {
+        "viseme":String,
+        "audio":Json=>{"data":byte[], "type":String}
+    }
+```
+----
+
 # Allosaurus
 
 ![CI Test](https://github.com/xinjli/allosaurus/actions/workflows/python.yml/badge.svg)

@@ -6,6 +6,60 @@ import argparse
 
 if __name__ == '__main__':
 
+    ipa_to_viseme = {
+        "b": "p",
+        "d": "t",
+        "d͡ʒ": "S",
+        "ð": "T",
+        "f": "f",
+        "ɡ": "k",
+        "h": "k",
+        "j": "i",
+        "k": "k",
+        "l": "t",
+        "m": "p",
+        "n": "t",
+        "ŋ": "k",
+        "p": "p",
+        "ɹ": "r",
+        "s": "s",
+        "ʃ": "S",
+        "t": "t",
+        "t͡ʃ": "S",
+        "θ": "T",
+        "v": "f",
+        "w": "u",
+        "z": "s",
+        "ʒ": "S",
+        "ə": "@",
+        "ɚ": "@",
+        "æ": "a",
+        "aɪ": "a",
+        "aʊ": "a",
+        "ɑ": "a",
+        "eɪ": "e",
+        "ɝ": "E",
+        "ɛ": "E",
+        "i": "i",
+        "ɪ": "i",
+        "oʊ": "o",
+        "ɔ": "O",
+        "ɔɪ": "O",
+        "u": "u",
+        "ʊ": "u",
+        "ʌ": "E",
+        "sil": "sil"
+        # Add more mappings as needed
+    }
+    def convert_ipa_to_viseme(ipa_string):
+        viseme_string = ""
+        viseme = ipa_to_viseme.get(ipa_string)
+        if viseme:
+            viseme_string += viseme
+        else:
+            # Handle unknown IPA symbol
+            viseme_string += "?"  # Assign a default viseme or any other desired behavior
+        return viseme_string
     parser = argparse.ArgumentParser('Allosaurus phone recognizer')
     parser.add_argument('-d', '--device_id', type=int, default=-1, help='specify cuda device id to use, -1 means no cuda and will use cpu for inference')
     parser.add_argument('-m', '--model', type=str, default='latest', help='specify which model to use. default is to use the latest local model')
@@ -70,10 +124,41 @@ if __name__ == '__main__':
         # run inference
         phones = recognizer.recognize(args.input, args.lang, args.topk, args.emit, args.timestamp)
 
+        json = '"'
         if output_fd:
             output_fd.write(phones+'\n')
+            output_fd.write("fuck my life3"+'\n')
         else:
-            print(phones)
+            viseme = phones.split('\n')
+            count = 0
+            lastTime = 0
+            for x in range(len(viseme)):
+                json = json + '{\\"time\\":'
+                row = viseme[x].split(" ")
+                for y in range(len(row)):
+                    if y == 0:
+                        time = row[y].replace(".", "").lstrip("0")
+                        if count == 0:
+                            count = 1
+                            lastTime = int(time)
+                        else:
+                            if lastTime + 400 < int(time):
+                                json = json + ((str(int(time) - 250)) + ',\\"type\\":\\"viseme\\",\\"value\\":\\"sil\\"}\\n')
+                                json = json + '{\\"time\\":'
+                                lastTime = int(time)
+                            else:
+                                lastTime = int(time)
+                        json = json + time
+                        json = json + ',\\"type\\":\\"viseme\\",\\"value\\":\\"'
+
+                    if y == 2:
+
+                        json = json + convert_ipa_to_viseme(row[y])
+                        json = json + '\\"}\\n'
+            json = json + '"'
+            print(json)
+
 
     if output_fd:
         output_fd.close()
+
